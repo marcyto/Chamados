@@ -26,34 +26,38 @@
 }
 form h1{
     text-align: center;
+    margin-bottom: 0.5em;
+    color: #181c2e;
 }
 form{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    margin-top: 1.5em;
+    width: 90%;
 }
-form input{
-    margin: 10px;
-    width: 450px;
-    padding: 5px;
-    border: none;
-    border-radius: 10px;
+.login input{
+    margin-bottom: 15px;
+    height: 35px;
+    border: 0;
+    border-radius: 7px;
+    padding: 10px;
+    font-size: 15px;
+    background-color: #FFF;
 }
 form button{
-    width: 450px;
-    border: none;
-    padding: 5px;
+    height: 35px;
+    border: 0;
+    border-radius:7px;
     background-color: #181c2e;
-    color: #EAEAEC;
-    border-radius: 10px;
+    color: #FFF;
+    font-size: 1.3em;
     transition: all 0.5s;
 }
 form button:hover{
     background-color: #01018e;
 }
 .login a{
-    margin: 10px;
-    text-decoration: none;
-    
+    margin: 1.5em 0;
+    color: #000;
+    cursor: pointer;    
 }

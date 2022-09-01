@@ -15,7 +15,7 @@ export default function Header(){
                 <img src={user.avatarUrl === null ? avatar : user.avatarUrl}/>
             </div>
 
-            <Link to="/callings">
+            <Link to="/dashboard">
                 <FiHome color="#FFF" size={25}/>
                 Chamados
             </Link>

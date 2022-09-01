@@ -5,7 +5,7 @@ import Route from './route';
 import Dashboard from '../pages/dashboard';
 import Profile from "../pages/profile";
 import Customers from "../pages/customers";
-import Callings from "../pages/callings";
+import New from "../pages/New";
 
 export default function Routes(){
     return(
@@ -15,7 +15,7 @@ export default function Routes(){
             <Route exact path="/dashboard" component={Dashboard} isPrivate/>
             <Route exact path="/profile" component={Profile} isPrivate/>
             <Route exact path="/customers" component={Customers} isPrivate/>
-            <Route exact path="/callings" component={Callings} isPrivate/>
+            <Route exact path="/new" component={New} isPrivate/>
         </Switch>
     );
 }
