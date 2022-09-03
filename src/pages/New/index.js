@@ -6,13 +6,14 @@ import './new.css';
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../contexts/auth";
 import firebase from "../../services/firebaseConnection";
+import { toast } from 'react-toastify';
 
 export default function New(){
 
     const [loadCustomers, setLoadCustomers] = useState(true);
-    const [selectedCustomer, setSelectedCustomer] = useState('');
+    const [selectedCustomer, setSelectedCustomer] = useState(0);
     const [customers, setCustomers] = useState([]);
-    const [assunto, setAssunto] = useState('');
+    const [assunto, setAssunto] = useState('Suporte');
     const [status, setStatus] = useState('Aberto');
     const [complemento, setComplemento] =  useState('');
 
@@ -33,12 +34,11 @@ export default function New(){
                         nomeFantasia: doc.data().nomeFantasia
                     })
                 })
-                console.log(lista);
 
                 if(lista.length === 0){
                     console.log("Nenhuma empresa cadastrada");
-                    setLoadCustomers(false);
                     setSelectedCustomer([{id: '1', nomeFantasia:''}])
+                    setLoadCustomers(false);
                     return;
                 }
                 setCustomers(lista);
@@ -56,8 +56,32 @@ export default function New(){
     }, [])
     
 
-    function handleRegister(e){
+    async function handleRegister(e){
         e.preventDefault();
+
+        await firebase.firestore().collection('Chamados')
+        .add({
+            created: new Date(),
+            cliente: customers[selectedCustomer].nomeFantasia,
+            clientId: customers[selectedCustomer].id,
+            assunto: assunto,
+            status: status,
+            complemento: complemento,
+            userId: user.uid,
+        })
+        .then(()=>{
+            toast.success('Chamado cadastrado com sucesso');
+            setComplemento('');
+            setSelectedCustomer(0);
+
+
+        })
+        .catch((err)=>{
+            toast.error('Ops, parece que algo deu errado, tente novamente!');
+            console.log(err);
+        })
+
+
     }
 
     function handleSubjectSelect(e){
@@ -68,7 +92,6 @@ export default function New(){
     }
     function handleComplementSelect(e){
         setComplemento(e.target.value);
-        console.log(e.target.value);
     }
     function handleChangeCustomer(e){
         setSelectedCustomer(e.target.value);
